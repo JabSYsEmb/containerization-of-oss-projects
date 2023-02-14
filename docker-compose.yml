@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  moodledb:
+    image: mysql 
+    environment:
+      - MYSQL_DATABASE=moodledb
+      - MYSQL_USER=moodledbuser
+      - MYSQL_PASSWORD=password
+      - MYSQL_ROOT_PASSWORD=password
+    ports:
+      - 3306:3306
+    networks:
+      - moodle-net
+    container_name: moodledb
+
+  moodlephp:
+    image: moodle
+    build:
+      context:  ./moodle
+    ports:
+      - 80:80
+    volumes:
+      - ./moodle/moodle:/var/www/html/moodle
+      - ./moodle/php.ini:/usr/local/etc/php/php.ini
+      - ./moodle/phpinfo.php:/var/www/html/phpinfo.php
+    depends_on:
+      - moodledb
+    networks:
+      - moodle-net
+    container_name: moodlephp
+
+networks:
+  moodle-net:
