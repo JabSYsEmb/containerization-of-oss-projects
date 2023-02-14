@@ -8,6 +8,8 @@ services:
       - MYSQL_USER=moodledbuser
       - MYSQL_PASSWORD=password
       - MYSQL_ROOT_PASSWORD=password
+    volumes:
+      - ./mysql/db:/var/lib/mysql
     ports:
       - 3306:3306
     networks:
@@ -17,7 +19,7 @@ services:
   moodlephp:
     image: moodle
     build:
-      context:  ./moodle
+      context:  ./moodle/
     ports:
       - 80:80
     volumes:
