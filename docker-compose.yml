@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  # reverse-proxy:
+    # image: nginx
+    #    volumes:
+    # - ./nginx-proxy/nginx.conf:/etc/nginx/nginx.conf
+    # ports:
+    # - 8080:8080
+    # depends_on:
+    # - moodlephp
+    # - moodledb
+    # networks:
+    # - moodle-net
+    # container_name: revers-proxy
+
   moodledb:
     image: mysql 
     environment:
@@ -26,6 +39,7 @@ services:
       - ./moodle/moodle:/var/www/html/moodle
       - ./moodle/php.ini:/usr/local/etc/php/php.ini
       - ./moodle/phpinfo.php:/var/www/html/phpinfo.php
+        # - moodle-php:/var/ww/html/moodle/
     depends_on:
       - moodledb
     networks:
@@ -34,3 +48,7 @@ services:
 
 networks:
   moodle-net:
+
+    #volumes:
+    #  moodle-php:
+    #    external: false
