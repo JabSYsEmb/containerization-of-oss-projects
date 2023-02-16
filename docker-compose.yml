@@ -36,7 +36,7 @@ services:
     ports:
       - 80:80
     volumes:
-      - ./moodle/moodle:/var/www/html/moodle
+      - ./moodle/moodle:/var/www/html/moodle:rw
       - ./moodle/php.ini:/usr/local/etc/php/php.ini
       - ./moodle/phpinfo.php:/var/www/html/phpinfo.php
         # - moodle-php:/var/ww/html/moodle/
