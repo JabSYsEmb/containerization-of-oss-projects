@@ -1,6 +1,19 @@
 version: '3'
 
 services:
+  rev-proxy:
+    image: nginx
+    volumes:
+      - ./nginx/conf.d/moodle.conf:/etc/nginx/conf.d/moodle.conf:ro
+    ports:
+      - 80:80
+    depends_on:
+      - moodlephp
+      - moodledb
+    networks:
+      - moodle-net
+    container_name: rev-proxy
+    
   moodledb:
     image: mysql 
     environment:
@@ -21,7 +34,7 @@ services:
     build:
       context: ./moodle/
     ports:
-      - 80:80
+      - 80
     volumes:
       - ./moodle/moodle:/var/www/moodle:rw
       - ./moodle/php.ini:/usr/local/etc/php/php.ini
