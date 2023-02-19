@@ -1,6 +1,6 @@
 FROM php:8.1-apache
 
-WORKDIR /var/www/html
+COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/
 
 EXPOSE 80
 
