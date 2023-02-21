@@ -1,6 +1,5 @@
 FROM php:8.1-apache
 
-COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/
 
 EXPOSE 80
 
@@ -10,6 +9,8 @@ RUN apt-get update &&\
 
 RUN mkdir -p /var/www/moodledata &&\
     chown www-data:www-data /var/www/moodledata
+
+COPY ./elearning.ikametyok.com.conf /etc/apache2/sites-enabled/
 
 ENTRYPOINT ["docker-php-entrypoint"]
 
