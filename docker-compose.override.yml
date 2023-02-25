@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  rev-proxy:
+    env_file:
+      - "./moodle/.env"
+
+  moodlephp:
+    build:
+      context: "./moodle"
+      dockerfile: "Dockerfile.dev"
+    volumes:
+      - "./moodle/phpinfo.php:/var/www/html/phpinfo.php"
+      - "./html/3.html:/var/www/testing/index.html"
+      - "./html/2.html:/var/www/testin/index.html"
+      - "~/.vimrc.base:/root/.vimrc"
+    environment:
+      - Testing=testing.colasloth.com
+      - Testin=testin.colasloth.com
+    env_file:
+      - "./moodle/.env"

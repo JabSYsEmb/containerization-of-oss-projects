@@ -9,8 +9,9 @@ RUN apt-get update &&\
 RUN mkdir -p /var/www/moodledata &&\
     chown -R www-data:www-data /var/www/
 
-#COPY ./php.ini /usr/local/etc/php/php.ini
-COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/
+RUN apt-get install -y vim
+
+COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/colasloth.com.conf
 
 EXPOSE 80
 
