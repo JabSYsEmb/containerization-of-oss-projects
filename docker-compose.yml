@@ -11,7 +11,7 @@ services:
       - moodlephp
       - moodledb
     networks:
-      - moodle-net
+      - colasloth
     container_name: rev-proxy
 
   moodledb:
@@ -26,7 +26,7 @@ services:
     ports:
       - 3306
     networks:
-      - moodle-net
+      - colasloth
     container_name: moodledb
 
   moodlephp:
@@ -41,7 +41,7 @@ services:
     depends_on:
       - moodledb
     networks:
-      - moodle-net
+      - colasloth
     container_name: moodlephp
 
     # web:
@@ -51,7 +51,7 @@ services:
     #   ports:
     #     - 8069
     #   networks:
-    #     - moodle-net
+    #     - colasloth
     #   container_name: odoo_project
 
     # db:
@@ -61,8 +61,8 @@ services:
     #     - POSTGRES_PASSWORD=odoo
     #     - POSTGRES_USER=odoo
     #   networks:
-    #     - moodle-net
+    #     - colasloth
     #   container_name: odoodb
 
 networks:
-  moodle-net:
+  colasloth:
