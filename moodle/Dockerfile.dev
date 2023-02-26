@@ -15,6 +15,4 @@ COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/colasloth.com.conf
 
 EXPOSE 80
 
-ENTRYPOINT ["docker-php-entrypoint"]
-
-CMD ["apache2-foreground"]
+ENTRYPOINT ["docker-php-entrypoint", "apache2-foreground"]

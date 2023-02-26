@@ -4,6 +4,8 @@ services:
   rev-proxy:
     volumes:
       - "./html/nginx.html:/var/www/html/index.html"
+    depends_on:
+      - gblog
     env_file:
       - "./moodle/.env"
 
@@ -18,3 +20,13 @@ services:
       - "~/.vimrc.base:/root/.vimrc"
     env_file:
       - "./moodle/.env"
+
+  gblog:
+    image: ghost
+    ports:
+      - 2368
+    environment:
+      - NODE_ENV=development
+    networks:
+      - moodle-net
+    container_name: gblog
