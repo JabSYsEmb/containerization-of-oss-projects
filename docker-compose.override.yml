@@ -2,6 +2,8 @@ version: '3'
 
 services:
   rev-proxy:
+    volumes:
+      - "./html/nginx.html:/var/www/html/index.html"
     env_file:
       - "./moodle/.env"
 
@@ -14,8 +16,5 @@ services:
       - "./html/3.html:/var/www/testing/index.html"
       - "./html/2.html:/var/www/testin/index.html"
       - "~/.vimrc.base:/root/.vimrc"
-    environment:
-      - Testing=testing.colasloth.com
-      - Testin=testin.colasloth.com
     env_file:
       - "./moodle/.env"
