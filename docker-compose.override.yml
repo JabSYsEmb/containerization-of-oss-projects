@@ -7,7 +7,7 @@ services:
     depends_on:
       - gblog
     env_file:
-      - "./moodle/.env"
+      - "./nginx/.env"
 
   moodlephp:
     build:
@@ -17,6 +17,7 @@ services:
       - "./moodle/phpinfo.php:/var/www/html/phpinfo.php"
       - "./html/3.html:/var/www/testing/index.html"
       - "./html/2.html:/var/www/testin/index.html"
+      - "./moodle/envvars:/etc/apache2/envvars"
       - "~/.vimrc.base:/root/.vimrc"
     env_file:
       - "./moodle/.env"
