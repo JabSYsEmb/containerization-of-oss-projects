@@ -9,10 +9,9 @@ RUN apt-get update &&\
 RUN mkdir -p /var/www/moodledata &&\
     chown -R www-data:www-data /var/www/
 
-#COPY ./php.ini /usr/local/etc/php/php.ini
-COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/
-
 EXPOSE 80
+
+USER www-data
 
 ENTRYPOINT ["docker-php-entrypoint"]
 

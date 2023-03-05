@@ -11,8 +11,6 @@ RUN mkdir -p /var/www/moodledata &&\
 
 RUN apt-get install -y vim
 
-COPY ./moodle.colasloth.com.conf /etc/apache2/sites-enabled/colasloth.com.conf
-
 EXPOSE 80
 
 USER www-data

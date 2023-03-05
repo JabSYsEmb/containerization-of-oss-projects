@@ -36,6 +36,8 @@ services:
     ports:
       - 80
     volumes:
+      - "./moodle/colasloth.com.conf:/etc/apache2/sites-enabled/colasloth.com.conf"
+      - "./moodle/php.ini:/usr/local/etc/php/php.ini"
       - "./moodle/moodle:/var/www/moodle:rw"
       - "./html/1.html:/var/www/testing/index.html"
     depends_on:
