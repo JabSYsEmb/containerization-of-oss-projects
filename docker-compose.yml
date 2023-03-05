@@ -7,9 +7,12 @@ services:
       - "./nginx/conf.d/moodle.conf:/etc/nginx/templates/default.conf.template"
     ports:
       - "80:80"
+    env_file:
+      - "./nginx/.env"
     depends_on:
       - moodlephp
       - moodledb
+      - gblog
     networks:
       - colasloth
     container_name: rev-proxy
@@ -37,15 +40,30 @@ services:
       - 80
     volumes:
       - "./moodle/colasloth.com.conf:/etc/apache2/sites-enabled/colasloth.com.conf"
+      - "./moodle/phpinfo.php:/var/www/html/phpinfo.php"
       - "./moodle/php.ini:/usr/local/etc/php/php.ini"
-      - "./moodle/moodle:/var/www/moodle:rw"
       - "./html/1.html:/var/www/testing/index.html"
+      - "./html/2.html:/var/www/testin/index.html"
+      - "./html/3.html:/var/www/html/index.html"
+      - "./moodle/moodle:/var/www/moodle:rw"
+    env_file:
+      - "./moodle/.env"
     depends_on:
       - moodledb
     networks:
       - colasloth
     container_name: moodlephp
 
+  gblog:
+    image: ghost
+    ports:
+      - 2368
+    environment:
+      - NODE_ENV=development
+    networks:
+      - colasloth
+    container_name: gblog
+    
     # web:
     #   image: odoo
     #   depends_on:

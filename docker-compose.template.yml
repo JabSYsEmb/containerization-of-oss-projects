@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  moodlephp:
+    build:
+      context: "./moodle"
+      dockerfile: "Dockerfile.dev"
+    volumes:
+      - "./html/3.html:/var/www/testing/index.html"
+      - "./html/2.html:/var/www/testin/index.html"
+      - "~/.vimrc.base:/root/.vimrc"
+    env_file:
+      - "./moodle/.env"
