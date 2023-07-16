@@ -1,10 +1,10 @@
-version: '3'
+version: "3"
 
 services:
   rev-proxy:
     image: nginx
     volumes:
-      - "./nginx/conf.d/moodle.conf:/etc/nginx/templates/default.conf.template"
+      - "./nginx/conf.d/default.conf:/etc/nginx/templates/default.conf.template"
     ports:
       - "80:80"
     env_file:
@@ -13,12 +13,13 @@ services:
       - moodlephp
       - moodledb
       - gblog
+      - odoo
     networks:
       - colasloth
     container_name: rev-proxy
 
   moodledb:
-    image: mysql 
+    image: mysql
     environment:
       - MYSQL_DATABASE=moodledb
       - MYSQL_USER=moodledbuser
@@ -42,9 +43,7 @@ services:
       - "./moodle/colasloth.com.conf:/etc/apache2/sites-enabled/colasloth.com.conf"
       - "./moodle/phpinfo.php:/var/www/html/phpinfo.php"
       - "./moodle/php.ini:/usr/local/etc/php/php.ini"
-      - "./html/1.html:/var/www/testing/index.html"
-      - "./html/2.html:/var/www/testin/index.html"
-      - "./html/3.html:/var/www/html/index.html"
+      - "./html/nginx.html:/var/www/html/index.html"
       - "./moodle/moodle:/var/www/moodle:rw"
     env_file:
       - "./moodle/.env"
@@ -63,26 +62,26 @@ services:
     networks:
       - colasloth
     container_name: gblog
-    
-    # web:
-    #   image: odoo
-    #   depends_on:
-    #     - db
-    #   ports:
-    #     - 8069
-    #   networks:
-    #     - colasloth
-    #   container_name: odoo_project
 
-    # db:
-    #   image: postgres:13
-    #   environment:
-    #     - POSTGRES_DB=postgres
-    #     - POSTGRES_PASSWORD=odoo
-    #     - POSTGRES_USER=odoo
-    #   networks:
-    #     - colasloth
-    #   container_name: odoodb
+  web:
+    image: odoo
+    depends_on:
+      - db
+    ports:
+      - 8069
+    networks:
+      - colasloth
+    container_name: odoo
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=odoo
+      - POSTGRES_USER=odoo
+    networks:
+      - colasloth
+    container_name: odoodb
 
 networks:
   colasloth:
